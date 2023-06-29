@@ -1,0 +1,20 @@
+{
+    "name": "UserInterface",
+    "rootNamespace": "",
+    "references": [
+        "GUID:b93f844d45cfcc44fa2b0eed5c9ec6bb",
+        "GUID:0b3223e408fa21043a33fd3d7cdc5ab5"
+    ],
+    "includePlatforms": [
+        "Android",
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
