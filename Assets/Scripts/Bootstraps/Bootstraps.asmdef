@@ -1,0 +1,22 @@
+{
+    "name": "Bootstraps",
+    "rootNamespace": "",
+    "references": [
+        "GUID:b93f844d45cfcc44fa2b0eed5c9ec6bb",
+        "GUID:68e355d3759e8004dba341fbdfddd4fe"
+    ],
+    "includePlatforms": [
+        "Android",
+        "Editor",
+        "WindowsStandalone32",
+        "WindowsStandalone64"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

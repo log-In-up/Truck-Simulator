@@ -31,6 +31,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "IncreaseGearRatio",
+                    "type": "Button",
+                    "id": "d074135e-6808-45b4-b73e-4be404c95d53",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ReduceGearRatio",
+                    "type": "Button",
+                    "id": "139e0d5c-d962-46a2-8c4c-6f44056cfbec",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -183,7 +201,7 @@
                     "path": "<Pointer>/delta",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse;Touch",
+                    "groups": "Touch;Keyboard&Mouse",
                     "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -251,6 +269,28 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "86407b9b-6591-4bea-9fa6-0de5c188b4f8",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "IncreaseGearRatio",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "60a617a7-ecf1-4d9a-928f-1c1f7ebff789",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "ReduceGearRatio",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

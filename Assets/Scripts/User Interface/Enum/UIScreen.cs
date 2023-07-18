@@ -4,6 +4,7 @@ namespace UserInterface
     {
         GameScreen,
         MainMenuScreen,
-        SplashScreen
+        SplashScreen,
+        PlayerInfo
     }
 }

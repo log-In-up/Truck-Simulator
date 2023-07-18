@@ -12,8 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d393230fa5e7ace43b4a5b6e2f969b3b, type: 3}
   m_Name: Car Data
   m_EditorClassIdentifier: 
-  <MotorTorque>k__BackingField: 500
   <ForwardSpeed>k__BackingField: 100
   <BackwardSpeed>k__BackingField: 10
-  <BrakeTorque>k__BackingField: 500
-  <RotationAngle>k__BackingField: 20
+  <RotationAngle>k__BackingField: 45
+  <MinMotorTorque>k__BackingField: 0
+  <MaxMotorTorque>k__BackingField: 667
+  <MaxMotorTorqueTime>k__BackingField: 10
+  <ReverseGearRatio>k__BackingField: 5.48
+  <GearRatios>k__BackingField:
+  - 5.26
+  - 2.9
+  - 1.52
+  - 1
+  - 0.66
+  <SpeedLimitGearRatios>k__BackingField:
+  - 25
+  - 40
+  - 60
+  - 90

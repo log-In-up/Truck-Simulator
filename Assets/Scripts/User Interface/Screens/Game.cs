@@ -1,16 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace UserInterface
 {
     public sealed class Game : ScreenObserver
     {
-        #region Fields
-
+        #region Editor Fields
+        [SerializeField] private TextMeshProUGUI _speedometer = null;
+        [SerializeField] private TextMeshProUGUI _transmissionRatio = null;
         #endregion
 
         #region Properties
+        public TextMeshProUGUI Speedometer => _speedometer;
+        public TextMeshProUGUI TransmissionRatio => _transmissionRatio;
         public override UIScreen Screen => UIScreen.GameScreen;
         #endregion
 

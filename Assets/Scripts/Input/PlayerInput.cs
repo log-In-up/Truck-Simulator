@@ -55,6 +55,24 @@ namespace Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""IncreaseGearRatio"",
+                    ""type"": ""Button"",
+                    ""id"": ""d074135e-6808-45b4-b73e-4be404c95d53"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ReduceGearRatio"",
+                    ""type"": ""Button"",
+                    ""id"": ""139e0d5c-d962-46a2-8c4c-6f44056cfbec"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -207,7 +225,7 @@ namespace Input
                     ""path"": ""<Pointer>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse;Touch"",
+                    ""groups"": ""Touch;Keyboard&Mouse"",
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -275,6 +293,28 @@ namespace Input
                     ""processors"": """",
                     ""groups"": ""XR"",
                     ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""86407b9b-6591-4bea-9fa6-0de5c188b4f8"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""IncreaseGearRatio"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""60a617a7-ecf1-4d9a-928f-1c1f7ebff789"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ReduceGearRatio"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -865,6 +905,8 @@ namespace Input
             m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
             m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
             m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
+            m_Player_IncreaseGearRatio = m_Player.FindAction("IncreaseGearRatio", throwIfNotFound: true);
+            m_Player_ReduceGearRatio = m_Player.FindAction("ReduceGearRatio", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -941,6 +983,8 @@ namespace Input
         private readonly InputAction m_Player_Move;
         private readonly InputAction m_Player_Look;
         private readonly InputAction m_Player_Fire;
+        private readonly InputAction m_Player_IncreaseGearRatio;
+        private readonly InputAction m_Player_ReduceGearRatio;
         public struct PlayerActions
         {
             private @PlayerInput m_Wrapper;
@@ -948,6 +992,8 @@ namespace Input
             public InputAction @Move => m_Wrapper.m_Player_Move;
             public InputAction @Look => m_Wrapper.m_Player_Look;
             public InputAction @Fire => m_Wrapper.m_Player_Fire;
+            public InputAction @IncreaseGearRatio => m_Wrapper.m_Player_IncreaseGearRatio;
+            public InputAction @ReduceGearRatio => m_Wrapper.m_Player_ReduceGearRatio;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -966,6 +1012,12 @@ namespace Input
                 @Fire.started += instance.OnFire;
                 @Fire.performed += instance.OnFire;
                 @Fire.canceled += instance.OnFire;
+                @IncreaseGearRatio.started += instance.OnIncreaseGearRatio;
+                @IncreaseGearRatio.performed += instance.OnIncreaseGearRatio;
+                @IncreaseGearRatio.canceled += instance.OnIncreaseGearRatio;
+                @ReduceGearRatio.started += instance.OnReduceGearRatio;
+                @ReduceGearRatio.performed += instance.OnReduceGearRatio;
+                @ReduceGearRatio.canceled += instance.OnReduceGearRatio;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -979,6 +1031,12 @@ namespace Input
                 @Fire.started -= instance.OnFire;
                 @Fire.performed -= instance.OnFire;
                 @Fire.canceled -= instance.OnFire;
+                @IncreaseGearRatio.started -= instance.OnIncreaseGearRatio;
+                @IncreaseGearRatio.performed -= instance.OnIncreaseGearRatio;
+                @IncreaseGearRatio.canceled -= instance.OnIncreaseGearRatio;
+                @ReduceGearRatio.started -= instance.OnReduceGearRatio;
+                @ReduceGearRatio.performed -= instance.OnReduceGearRatio;
+                @ReduceGearRatio.canceled -= instance.OnReduceGearRatio;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -1164,6 +1222,8 @@ namespace Input
             void OnMove(InputAction.CallbackContext context);
             void OnLook(InputAction.CallbackContext context);
             void OnFire(InputAction.CallbackContext context);
+            void OnIncreaseGearRatio(InputAction.CallbackContext context);
+            void OnReduceGearRatio(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {

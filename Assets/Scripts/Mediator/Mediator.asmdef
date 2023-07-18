@@ -1,0 +1,24 @@
+{
+    "name": "Mediator",
+    "rootNamespace": "",
+    "references": [
+        "GUID:b93f844d45cfcc44fa2b0eed5c9ec6bb",
+        "GUID:7523a78bc5365ba47adeb2eb48903ed7",
+        "GUID:e936683bc1287ed48947ec2e44a281d0",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
+    ],
+    "includePlatforms": [
+        "Android",
+        "Editor",
+        "WindowsStandalone32",
+        "WindowsStandalone64"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

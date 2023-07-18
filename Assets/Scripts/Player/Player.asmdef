@@ -3,13 +3,18 @@
     "rootNamespace": "",
     "references": [
         "GUID:b93f844d45cfcc44fa2b0eed5c9ec6bb",
-        "GUID:4bb4452a09f45d841acaec8f78e6acc9",
         "GUID:75469ad4d38634e559750d17036d5f7c",
-        "GUID:fce68e6dceeaa17449522f262c5770d1"
+        "GUID:4bb4452a09f45d841acaec8f78e6acc9",
+        "GUID:fce68e6dceeaa17449522f262c5770d1",
+        "GUID:6f54ffc9b34ded4489ccc1e2232a429b",
+        "GUID:68e355d3759e8004dba341fbdfddd4fe",
+        "GUID:e55e0fbc7953ff54785f708ca864f989"
     ],
     "includePlatforms": [
         "Android",
-        "Editor"
+        "Editor",
+        "WindowsStandalone32",
+        "WindowsStandalone64"
     ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
