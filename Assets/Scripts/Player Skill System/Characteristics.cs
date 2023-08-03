@@ -38,7 +38,7 @@ namespace SkillSystem
 
         public bool SkillLevelCanBeLowered(Skill skill) => _currentSkillLevel[skill] > 0;
 
-        public bool SkillLevelCanBeIncreased(Skill skill) => _currentSkillLevel[skill] < _maxSkillLevel[skill];
+        public bool SkillLevelCanBeIncreased(Skill skill) => _currentSkillLevel[skill] < _maxSkillLevel[skill] - 1;
 
         public int GetSkillLevel(Skill skill) => _currentSkillLevel[skill];
         #endregion

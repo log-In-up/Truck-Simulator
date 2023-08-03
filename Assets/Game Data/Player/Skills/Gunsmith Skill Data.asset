@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Gunsmith Skill Data
   m_EditorClassIdentifier: 
   <SkillType>k__BackingField: 1
-  <SkillLevelData>k__BackingField: []
+  <SkillMaxLevel>k__BackingField: 10

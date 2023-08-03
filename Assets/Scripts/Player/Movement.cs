@@ -1,9 +1,9 @@
 using GameData.Vehicle;
 using Input;
-using SkillSystem;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using SkillSystem;
 
 namespace Player
 {
@@ -19,15 +19,17 @@ namespace Player
         #endregion
 
         #region Fields
-        private float _currentMotorTorque, _deltaMotorTorque;
+        private float _currentMotorTorque, _deltaMotorTorque, _currentSteerAngle;
 
-        private CarData _carData = null;     
+        private CarData _carData = null;
+        private Driving _drivingSkill = null;
+        private Characteristics _characteristics = null;
         private Transmission _transmission = null;
         private PlayerInput _input = null;
         private Rigidbody _rigidbody = null;
         private List<WheelCollider> _wheels = null;
 
-        private const float ZERO = 0.0f;
+        private const float ZERO = 0.0f, NEUTRAL_MULTIPLIER = 0.01f, STEER_ANGLE_DELTA = 0.1f;
         private const float Multiplier_From_MPS_to_KPH = 3.6f;
         #endregion
 
@@ -58,6 +60,7 @@ namespace Player
             _wheels = tempWheels.Distinct().ToList();
 
             _deltaMotorTorque = (_carData.MaxMotorTorque - _carData.MinMotorTorque) / _carData.MaxMotorTorqueTime;
+            _currentSteerAngle = 0.0f;
         }
 
         private void Update()
@@ -88,39 +91,75 @@ namespace Player
 
         private void Move(Vector2 direction)
         {
-            bool inMove = direction.y != ZERO;
-
-            float wheelTorque;
+            float wheelTorque = ZERO;
 
             if (_transmission.TransmissionLevel >= ZERO)
             {
-                wheelTorque = Mathf.Abs(direction.y * (_currentMotorTorque / _transmission.CurrentGearRatio));
+                if (direction.y > 0)
+                {
+                    wheelTorque = Mathf.Abs(direction.y * (_currentMotorTorque / _transmission.CurrentGearRatio));
+                }
             }
             else
             {
-                if (_transmission.TransmissionLevel == -2)
+                if (direction.y < 0 && _transmission.TransmissionLevel == -2)
                 {
                     wheelTorque = -Mathf.Abs(direction.y * (_currentMotorTorque / _carData.ReverseGearRatio));
                 }
-                else
-                {
-                    wheelTorque = ZERO;
-                }
             }
+
+            bool inMove = direction.y != ZERO;
+            bool transmissionIsOnNeutral = _transmission.TransmissionLevel != -1;
 
             foreach (WheelCollider wheel in _movementWheels)
             {
                 wheel.motorTorque = inMove ? wheelTorque : ZERO;
 
-                wheel.brakeTorque = inMove ? ZERO : _currentMotorTorque;
+                if (inMove)
+                {
+                    wheel.brakeTorque = transmissionIsOnNeutral ? ZERO : _currentMotorTorque * NEUTRAL_MULTIPLIER;
+                }
+                else
+                {
+                    wheel.brakeTorque = _currentMotorTorque;
+                }
             }
         }
 
         private void Steering(Vector2 direction)
         {
+            float steerAngle;
+            int level = _characteristics.GetSkillLevel(Skill.Driving);
+
+            if (direction.x != ZERO)
+            {
+                steerAngle = _currentSteerAngle + (direction.x * _carData.RotationAngle * _drivingSkill.RotationSpeedMultiplier[level] * Time.deltaTime);
+            }
+            else
+            {
+                if (Mathf.Abs(_currentSteerAngle) > STEER_ANGLE_DELTA)
+                {
+                    if (_currentSteerAngle > ZERO)
+                    {
+                        steerAngle = _currentSteerAngle - (_carData.RotationAngle * _drivingSkill.RotationSpeedMultiplier[level] * Time.deltaTime);
+
+                    }
+                    else
+                    {
+                        steerAngle = _currentSteerAngle + (_carData.RotationAngle * _drivingSkill.RotationSpeedMultiplier[level] * Time.deltaTime);
+                    }
+                }
+                else
+                {
+                    steerAngle = ZERO;
+                }
+            }
+
+            _currentSteerAngle = Mathf.Clamp(steerAngle, -_carData.RotationAngle, _carData.RotationAngle);
+
             foreach (WheelCollider wheel in _steeringWheels)
             {
-                wheel.steerAngle = direction.x * _carData.RotationAngle;
+                wheel.steerAngle = _currentSteerAngle;
             }
         }
 
@@ -151,10 +190,12 @@ namespace Player
         #endregion
 
         #region Public API
-        public void Init(CarData carData, Transmission transmission)
+        public void Init(CarData carData, Transmission transmission, Driving driving, Characteristics characteristics)
         {
             _carData = carData;
             _transmission = transmission;
+            _drivingSkill = driving;
+            _characteristics = characteristics;
         }
         #endregion
     }

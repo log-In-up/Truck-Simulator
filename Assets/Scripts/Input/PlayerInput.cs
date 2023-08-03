@@ -73,6 +73,15 @@ namespace Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PlayerInfo"",
+                    ""type"": ""Button"",
+                    ""id"": ""90f858bf-adc4-48d4-a991-164f0eae9560"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -315,6 +324,17 @@ namespace Input
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""ReduceGearRatio"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e30397c9-30d8-4111-8649-55219461feec"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""PlayerInfo"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -907,6 +927,7 @@ namespace Input
             m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
             m_Player_IncreaseGearRatio = m_Player.FindAction("IncreaseGearRatio", throwIfNotFound: true);
             m_Player_ReduceGearRatio = m_Player.FindAction("ReduceGearRatio", throwIfNotFound: true);
+            m_Player_PlayerInfo = m_Player.FindAction("PlayerInfo", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -985,6 +1006,7 @@ namespace Input
         private readonly InputAction m_Player_Fire;
         private readonly InputAction m_Player_IncreaseGearRatio;
         private readonly InputAction m_Player_ReduceGearRatio;
+        private readonly InputAction m_Player_PlayerInfo;
         public struct PlayerActions
         {
             private @PlayerInput m_Wrapper;
@@ -994,6 +1016,7 @@ namespace Input
             public InputAction @Fire => m_Wrapper.m_Player_Fire;
             public InputAction @IncreaseGearRatio => m_Wrapper.m_Player_IncreaseGearRatio;
             public InputAction @ReduceGearRatio => m_Wrapper.m_Player_ReduceGearRatio;
+            public InputAction @PlayerInfo => m_Wrapper.m_Player_PlayerInfo;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -1018,6 +1041,9 @@ namespace Input
                 @ReduceGearRatio.started += instance.OnReduceGearRatio;
                 @ReduceGearRatio.performed += instance.OnReduceGearRatio;
                 @ReduceGearRatio.canceled += instance.OnReduceGearRatio;
+                @PlayerInfo.started += instance.OnPlayerInfo;
+                @PlayerInfo.performed += instance.OnPlayerInfo;
+                @PlayerInfo.canceled += instance.OnPlayerInfo;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -1037,6 +1063,9 @@ namespace Input
                 @ReduceGearRatio.started -= instance.OnReduceGearRatio;
                 @ReduceGearRatio.performed -= instance.OnReduceGearRatio;
                 @ReduceGearRatio.canceled -= instance.OnReduceGearRatio;
+                @PlayerInfo.started -= instance.OnPlayerInfo;
+                @PlayerInfo.performed -= instance.OnPlayerInfo;
+                @PlayerInfo.canceled -= instance.OnPlayerInfo;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -1224,6 +1253,7 @@ namespace Input
             void OnFire(InputAction.CallbackContext context);
             void OnIncreaseGearRatio(InputAction.CallbackContext context);
             void OnReduceGearRatio(InputAction.CallbackContext context);
+            void OnPlayerInfo(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {

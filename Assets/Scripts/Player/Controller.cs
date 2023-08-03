@@ -23,10 +23,9 @@ namespace Player
             PlayerBootstrapper playerBootstrapper = FindObjectOfType<PlayerBootstrapper>();
 
             Driving driving = playerBootstrapper.SkillLoader.GetSkill<Driving>(Skill.Driving);
-            Characteristics characteristics = playerBootstrapper.Characteristics;
 
-            _transmission.Init(_carData, driving, characteristics);
-            _movement.Init(_carData, _transmission);
+            _transmission.Init(_carData, driving, playerBootstrapper.Characteristics);
+            _movement.Init(_carData, _transmission, driving, playerBootstrapper.Characteristics);
         }
         #endregion
     }
