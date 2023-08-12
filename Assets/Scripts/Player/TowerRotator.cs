@@ -6,6 +6,7 @@ namespace Player
 {
 #if UNITY_EDITOR
     [DisallowMultipleComponent]
+    [AddComponentMenu("Player/TowerRotator")]
 #endif
     public sealed class TowerRotator : MonoBehaviour
     {

@@ -7,6 +7,7 @@ namespace Player
 {
 #if UNITY_EDITOR
     [DisallowMultipleComponent]
+    [AddComponentMenu("Player/Controller")]
 #endif
     public sealed class Controller : MonoBehaviour
     {

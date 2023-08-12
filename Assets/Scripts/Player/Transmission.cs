@@ -8,6 +8,7 @@ namespace Player
 {
 #if UNITY_EDITOR
     [DisallowMultipleComponent, RequireComponent(typeof(Rigidbody))]
+    [AddComponentMenu("Player/Transmission")]
 #endif
     public sealed class Transmission : MonoBehaviour
     {

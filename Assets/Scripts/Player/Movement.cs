@@ -9,6 +9,7 @@ namespace Player
 {
 #if UNITY_EDITOR
     [DisallowMultipleComponent, RequireComponent(typeof(Rigidbody))]
+    [AddComponentMenu("Player/Movement")]
 #endif
     public sealed class Movement : MonoBehaviour
     {
